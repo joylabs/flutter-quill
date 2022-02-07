@@ -1,5 +1,7 @@
 import 'dart:math' as math;
 
+import 'package:flutter/material.dart';
+
 import '../../quill_delta.dart';
 import '../style.dart';
 import 'embeddable.dart';
@@ -226,6 +228,21 @@ class Text extends Leaf {
   @override
   String toPlainText() => value;
 }
+
+// class AtMention extends Leaf {
+//   AtMention([String text = ''])
+//       : assert(!text.contains('\n')),
+//         super.val(text);
+//
+//   @override
+//   Node newInstance() => AtMention(value);
+//
+//   @override
+//   String get value => _value as String;
+//
+//   @override
+//   String toPlainText() => value;
+// }
 
 /// An embed node inside of a line in a Quill document.
 ///

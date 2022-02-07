@@ -277,6 +277,23 @@ class _TextLineState extends State<TextLine> {
     final isLink = nodeStyle.containsKey(Attribute.link.key) &&
         nodeStyle.attributes[Attribute.link.key]!.value != null;
 
+    final isAtMention = nodeStyle.containsKey('@mention');
+
+    if (isAtMention) {
+      final recognizer = TapGestureRecognizer()
+      ..onTap = () {
+        debugPrint('$node');
+        debugPrint('$nodeStyle');
+      };
+      return TextSpan(
+        text: textNode.value,
+        style: _getInlineTextStyle(
+            textNode, defaultStyles, nodeStyle, lineStyle, isLink),
+        recognizer: recognizer,
+        mouseCursor: isLink && canLaunchLinks ? SystemMouseCursors.click : null,
+      );
+    }
+
     return TextSpan(
       text: textNode.value,
       style: _getInlineTextStyle(
@@ -318,6 +335,10 @@ class _TextLineState extends State<TextLine> {
 
     if (nodeStyle.containsKey(Attribute.inlineCode.key)) {
       res = _merge(res, defaultStyles.inlineCode!.styleFor(lineStyle));
+    }
+
+    if (nodeStyle.containsKey('@mention')) {
+      res = _merge(res, TextStyle(color: Colors.amberAccent));
     }
 
     final font = textNode.style.attributes[Attribute.font.key];
