@@ -12,7 +12,10 @@ dependencies:
   flutter:
     sdk: flutter
 
-  flutter_quill: ^7.2.19
+  flutter_quill:
+    git:
+      url: 'git@github.com:joylabs/flutter-quill.git'
+      ref: memo/1.17.0_version
 
   http: ^1.1.0
   image_picker: ">=0.8.5 <2.0.0"
